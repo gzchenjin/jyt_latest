@@ -1,0 +1,484 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+
+/* General Body and App Styling */
+body {
+    font-family: 'Noto Sans SC', "Microsoft YaHei UI", sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 14px;
+}
+
+#app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Top Button Bar */
+.top-bar {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #dcdcdc;
+    flex-shrink: 0;
+}
+
+.top-bar .btn {
+    padding: 6px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin: 0 5px;
+}
+
+.btn-generate { background-color: #4CAF50; }
+.btn-generate:hover { background-color: #45a049; }
+
+.btn-info { background-color: #e89127; }
+.btn-info:hover { background-color: #c87a1e; }
+
+.btn-io { background-color: #0078d4; }
+.btn-io:hover { background-color: #005a9e; }
+
+.btn-special { background-color: #8a2be2; }
+.btn-special:hover { background-color: #7b24cb; }
+
+.spacer { flex-grow: 1; }
+
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.panel {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.left-panel { flex: 3; margin-right: 10px; }
+.right-panel { flex: 2; }
+
+/* Collapsible Sections */
+.collapsible-section {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.collapsible-section summary {
+    font-weight: bold;
+    color: #191970;
+    padding: 10px 15px;
+    cursor: pointer;
+    background-color: #e5ffb0;
+    border-radius: 8px 8px 0 0;
+    list-style: none; /* Remove default marker */
+}
+.collapsible-section summary::-webkit-details-marker { display: none; } /* Chrome/Safari */
+.collapsible-section summary::marker { display: none; } /* Firefox */
+.collapsible-section summary::before { content: '► '; }
+.collapsible-section[open] > summary::before { content: '▼ '; }
+.collapsible-section[open] > summary { border-bottom: 1px solid #ddd; }
+
+
+.section-content {
+    padding: 15px;
+}
+
+/* Form Elements Styling */
+.form-row {
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.form-row > label:first-child {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 120px;
+    text-align: right;
+}
+.form-row > input[type="text"],
+.form-row > select,
+.form-row > textarea {
+    flex: 1 1 300px;
+}
+
+input, select, textarea, .btn {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input[disabled], select[disabled], textarea[disabled] {
+    background-color: #f0f0f0;
+    color: #999;
+}
+textarea { resize: vertical; }
+
+.inline-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+.inline-group label {
+    white-space: nowrap;
+}
+.inline-group input, .inline-group select {
+    flex-grow: 1;
+}
+
+.warning-text { color: red; font-weight: bold; margin: 0; padding-left: 130px; }
+.info-text { color: red; font-weight: bold; font-size: 1.1em; }
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+table tbody tr:nth-child(even) { background-color: #f9f9f9; }
+
+/* Help Panel */
+.help-title-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background-color: #e5ffb0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    color: #191970;
+    box-sizing: border-box;
+}
+.help-content {
+    background-color: #fafff0;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 15px;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+}
+
+/* Modal / Dialog Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 555px;
+    max-width: 80%;
+    min-height: 500px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+.modal-content.wide { min-width: 700px; }
+.modal-content h3 { margin-top: 0; }
+.modal-content textarea { flex-grow: 1; margin: 10px 0; }
+.modal-content .btn { align-self: flex-end; margin-top: 10px; }
+.small-text { font-size: 0.9em; color: #666; margin-top: -10px; }
+
+/* Specific Modal Styles */
+#pm-query-modal .table-container { max-height: 300px; overflow-y: auto; border: 1px solid #ddd; }
+.result-group, .table-group { margin-bottom: 15px; }
+.filter-controls { display: flex; gap: 10px; margin-bottom: 10px; }
+
+.attendees-form {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.email-controls { display: flex; align-items: center; margin-bottom: 10px; }
+.email-checklist-container {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* --- “重新同步部门”按钮的专属样式 --- */
+
+/* 按钮的默认样式 */
+#email-refresh-btn {
+    background-color: #ababab; /* 按钮的默认背景颜色 (当前为灰色) */
+    color: rgb(255, 255, 255);             /* 按钮的文字颜色 */
+    border: none;             /* 移除边框，让它看起来更干净 */
+    transition: background-color 0.2s; /* 添加一个平滑的颜色过渡效果 */
+}
+
+/* 鼠标悬停在按钮上时的样式 */
+#email-refresh-btn:hover {
+    background-color: #838383; /* 悬停时颜色变深 */
+}
+
+/* 鼠标按下按钮时的样式 (这就是您要的“按下变色”) */
+#email-refresh-btn:active {
+    background-color: #ababab; /* 按下时颜色变得更深 */
+    transform: translateY(1px); /* 添加一个轻微的下沉效果，模拟按下的感觉 */
+}
+
+
+/* --- 邮件弹窗中两个按钮的统一样式 --- */
+
+/* 按钮的默认样式 (同时作用于两个按钮) */
+#email-refresh-btn,
+#email-add-btn {
+    background-color: #6c757d; /* 按钮的默认背景颜色 (当前为灰色) */
+    color: white;             /* 按钮的文字颜色 */
+    border: none;             /* 移除边框 */
+    padding: 6px 12px;        /* 内边距 */
+    border-radius: 5px;       /* 圆角 */
+    cursor: pointer;          /* 鼠标悬停时显示手形图标 */
+    transition: background-color 0.2s; /* 添加平滑的颜色过渡效果 */
+}
+
+/* 鼠标悬停在按钮上时的样式 */
+#email-refresh-btn:hover,
+#email-add-btn:hover {
+    background-color: #5a6268; /* 悬停时颜色变深 */
+}
+
+/* 鼠标按下按钮时的样式 */
+#email-refresh-btn:active,
+#email-add-btn:active {
+    background-color: #495057; /* 按下时颜色变得更深 */
+    transform: translateY(1px); /* 添加轻微的下沉效果 */
+}
+
+/* --- 确保邮件弹窗中头部控件垂直对齐 --- */
+
+.email-controls {
+    display: flex;         /* 启用 Flexbox 布局 */
+    align-items: center; /* 核心：让容器内所有元素垂直居中对齐 */
+    gap: 8px;              /* 为按钮之间添加一点间距，更美观 */
+}
+
+/* 可选：为按钮强制设定一个最小高度来确保视觉上绝对一致。
+  这可以覆盖掉之前对这两个按钮的样式，或者您可以将之前的样式合并到这里。
+*/
+#email-refresh-btn,
+#email-add-btn {
+    min-height: 32px; /* 设置一个最小高度值 */
+    box-sizing: border-box; /* 确保 padding 和 border 被正确计算在高度内 */
+}
+
+
+/* --- 动态创建的“移除”按钮的专属样式 --- */
+
+.btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    /* 在这一行值的后面加上 !important */
+    padding: 6px 20px !important; 
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s;
+    white-space: nowrap; 
+}
+
+.btn-remove:hover {
+    background-color: #c82333; /* 鼠标悬停时颜色变深 */
+}
+
+.btn-remove:active {
+    background-color: #bd2130; /* 鼠标按下时颜色变得更深 */
+    transform: translateY(1px);
+}
+
+
+
+
+
+/* --- 统一所有弹窗中的“关闭”按钮样式 --- */
+
+/* 这里我们使用属性选择器 [id^="close-"] 
+  它会选取所有 id 属性值以 "close-" 开头的按钮元素
+*/
+button[id^="close-"] {
+    background-color: #6c757d; /* 设置一个统一的灰色背景 */
+    color: white;             /* 文字为白色 */
+    border: 1px solid #6c757d;
+    padding: 6px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* 鼠标悬停时的样式 */
+button[id^="close-"]:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* 鼠标按下时的样式 */
+button[id^="close-"]:active {
+    background-color: #495057;
+    border-color: #495057;
+}
+
+/* --- 为项目经理查询弹窗的“自动匹配结果”区域添加分割线 --- */
+
+.result-group {
+    border-top: 1px solid #8f8f8f;    /* 在顶部添加一条1像素宽的浅灰色实线 */
+    border-bottom: 1px solid #8f8f8f; /* 在底部添加一条1像素宽的浅灰色实线 */
+    padding-top: 10px;               /* 增加顶部的内边距，让文字和线条之间有呼吸空间 */
+    padding-bottom: 10px;            /* 增加底部的内边距 */
+    margin-bottom: 0px;             /* 增加和下方“人员列表查询”区域的外边距，让整体布局更舒适 */
+}
+
+/* --- 导航栏样式 (Logo居中版) --- */
+.navbar {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 10px 20px; /* 增加一点上下内边距 */
+    text-align: center; /* 关键：让内部的块级元素可以居中 */
+}
+
+/* 新增的Logo容器样式 */
+.nav-logo-container {
+    padding-bottom: 5px; /* 在Logo和导航链接之间创建一点间距 */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* 关键：让导航菜单在容器内居中 */
+    align-items: center;
+    /* 移除了固定的 height */
+}
+.nav-logo {
+    font-size: 1.8em; /* 稍微增大Logo字体 */
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    display: inline-block; /* 确保Logo可以应用text-align */
+    padding: 5px 0;
+}
+.nav-menu {
+    /* ... (这部分样式保持不变) ... */
+    list-style: none;
+    display: flex;
+    gap: 30px; 
+    margin: 0;
+    padding: 0;
+}
+
+/* --- 导航链接的通用样式 --- */
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 15px;
+    padding-bottom: 5px; /* 在文字下方留出一点空间给下划线 */
+    transition: color 0.2s, border-bottom-color 0.2s; /* 平滑过渡效果 */
+    border-bottom: 3px solid transparent; /* 关键：默认有一条看不见的（透明的）下划线占位 */
+}
+
+/* --- 鼠标悬停时的样式 --- */
+.nav-menu a:hover {
+    color: #4CAF50; /* 鼠标悬停时文字变绿 */
+}
+
+/* --- 当前激活页面的链接样式 --- */
+.nav-menu a.active {
+    color: #191970; /* 激活时文字变为深蓝色 */
+    border-bottom-color: #191970; /* 关键：将透明的下划线变为深蓝色，使其可见 */
+}
+
+
+/* --- 邮件弹窗部门列表样式优化 --- */
+
+/* 这是控制每一行布局的核心 */
+.mail-dept-item {
+    display: grid;
+    /* * 定义三列的宽度:
+     * 1. auto:  复选框列，宽度自动适应内容（非常窄）
+     * 2. 1fr:   部门名称列，占据所有剩余的可用空间（非常宽）
+     * 3. auto:  移除按钮列，宽度自动适应按钮文字
+     */
+    grid-template-columns: auto 1fr auto; 
+    
+    gap: 15px; /* 在三列之间增加一些间距 */
+    align-items: center; /* 垂直居中对齐行内的所有元素 */
+    padding: 8px 5px; /* 增加每行上下的间距，让列表不那么拥挤 */
+    border-bottom: 1px solid #eee; /* 在每行之间添加一个细微的分割线 */
+}
+
+/* 最后一项不需要下边框 */
+.mail-dept-item:last-child {
+    border-bottom: none;
+}
+
+/* --- 优化三列中的具体元素 --- */
+
+/* 1. 复选框列 */
+.mail-dept-item input[type="checkbox"] {
+    justify-self: center; /* 让复选框在自己的小格子(auto)里居中 */
+    margin: 0; /* 移除默认边距 */
+}
+
+/* 2. 部门名称列 */
+.mail-dept-item span {
+    text-align: left; /* 确保部门名称是左对齐的 */
+    font-size: 14px;
+    color: #333;
+    
+    /* 防止名称过长时破坏布局 */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; /* 如果名称实在太长，用...省略 */
+}
+
+/* 新增：让邮件弹窗中的下拉框跨越两列 */
+.mail-dept-item > select {
+    grid-column: 1 / 3; /* 关键：让下拉框从第1列开始，到第3列结束（即跨越1、2两列） */
+}

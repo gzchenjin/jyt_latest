@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新日志 - 纪要通</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: #f4f6f8; margin: 0; }
+        .content-container { max-width: 800px; margin: 40px auto; padding: 40px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); line-height: 1.8; }
+        h1 { color: #191970; }
+        .update-log { list-style: none; padding-left: 0; border-left: 3px solid #007bff; }
+        .update-item { padding-left: 20px; margin-bottom: 30px; position: relative; }
+        .update-item::before { content: '●'; color: #007bff; position: absolute; left: -9px; top: 5px; font-size: 1.2em; }
+        .update-date { display: block; color: #6c757d; font-size: 0.9em; margin-bottom: 5px; }
+        .update-item h2 { margin: 0 0 10px 0; font-size: 1.5em; color: #000000; }
+        .update-item ul { padding-left: 20px; }
+    </style>
+    <link rel="icon" type="image/x-icon" href="app_icon.ico">
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?1afc24c2a44e933ca14643b1989e9b08";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo-container">
+             <a href="index.html" class="nav-logo">纪要通</a>
+        </div>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="index.html">生成工具</a></li>
+                <li><a href="about.html">关于我们</a></li>
+                <li><a href="help.html">帮助中心</a></li>
+                <li><a href="blog.html" class="active">更新日志</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content-container">
+        <h1>更新日志与动态</h1>
+        <p>我们一直在努力改进纪要通，让它变得更好用。这里记录了我们的主要更新。</p>
+        
+        <ul class="update-log">
+            <li class="update-item">
+                <span class="update-date">2025年10月27日</span>
+                <h2>网页版 v1.1 - 架构调整</h2>
+                <p>根据公司2025年组织改革与机构调整方案的通知、领导分工调整的通知要求调整部门架构。</p>
+                <ul>
+                    <li><strong>填写描述</strong>：修正为调整后的部门。</li>
+                    <li><strong>填写范例与提示</strong>：人员相关部门调整，公共架构师清单更新。</li>
+                    <li><strong>参会人员、项目经理</strong>：修正为调整后的部门。</li>
+                </ul>
+            </li>
+
+            <li class="update-item">
+                <span class="update-date">2025年10月17日</span>
+                <h2>里程碑：纪要通网页版正式上线！</h2>
+                <p>为了让更多用户能够方便地使用，我们正式推出了纪要通的网页版。现在，您无需安装任何软件，在任何操作系统上打开浏览器即可享受高效的纪要生成体验。</p>
+                <ul>
+                    <li><strong>全新平台</strong>：实现完全跨平台支持，兼容Windows, macOS, Linux等主流操作系统。</li>
+                    <li><strong>数据管理</strong>：新增数据导入/导出功能，方便您随时保存和恢复表单内容。</li>
+                    <li><strong>体验升级</strong>：针对网页端全面重构UI，优化交互流程，操作更直观、更流畅。</li>
+                </ul>
+            </li>
+
+            <li class="update-item">
+                <span class="update-date">2025年10月10日</span>
+                <h2>桌面版 v2.1.06 - 功能完善</h2>
+                <p>此版本集成了多个实用查询功能，标志着桌面版核心功能开发完成，为后续推广做好了准备。</p>
+                <ul>
+                    <li><strong>效率工具</strong>：新增参会人员智能查询功能。</li>
+                    <li><strong>数据同步</strong>：新增项目经理信息同步与级别查询。</li>
+                    <li><strong>便捷沟通</strong>：新增根据部门生成邮件联系人列表的功能。</li>
+                </ul>
+            </li>
+            <li class="update-item">
+                <span class="update-date">2025年9月30日</span>
+                <h2>桌面版 v2.1.05 - 小范围测试与优化</h2>
+                <p>在大客户服务部进行了小范围试点测试，根据真实用户反馈对产品进行了针对性优化。</p>
+                <ul>
+                    <li><strong>视觉改进</strong>：对应用界面进行了美化，提升用户体验。</li>
+                    <li><strong>稳定性提升</strong>：修复了测试中发现的若干逻辑错误。</li>
+                </ul>
+            </li>
+            <li class="update-item">
+                <span class="update-date">2025年8月中旬</span>
+                <h2>桌面版 v1.0 - 从0到1的突破</h2>
+                <p>纪要通的第一个桌面应用版本诞生。基于Python和PySide6构建，旨在解决Excel版本的局限性。</p>
+                <ul>
+                    <li><strong>核心功能</strong>：支持商机、投标、交底会三种核心纪要的生成。</li>
+                    <li><strong>可用性</strong>：解决了部分用户因无法使用宏而导致Excel版功能受限的问题。</li>
+                    <li><strong>可靠性</strong>：修复了早期版本遗留的多个BUG。</li>
+                    <li><strong>时效性</strong>：根据最新的组织架构变化对内部数据进行了调整。</li>
+                </ul>
+            </li>
+            <li class="update-item">
+                <span class="update-date">2025年8月7日</span>
+                <h2>Excel版 - 正式发布与推广</h2>
+                <p>在经过两个月的内部测试和迭代后，“两点三会纪要自动生成脚本”正式版发布，并在部门内进行了培训宣贯，获得了良好反馈。</p>
+            </li>
+            <li class="update-item">
+                <span class="update-date">2025年6月5日</span>
+                <h2>Excel版 - Beta测试与功能扩展</h2>
+                <p>首个面向团队的推广版本发布。在初代版本基础上增加了新功能，并首次应用于实际项目中。</p>
+                <ul>
+                    <li><strong>功能扩展</strong>：新增项目交底会会议纪要的生成。</li>
+                    <li><strong>体验优化</strong>：对模板描述和界面样式进行了调整。</li>
+                    <li><strong>技术增强</strong>：引入宏（Macro）以提升部分操作的自动化程度。</li>
+                </ul>
+            </li>
+            <li class="update-item">
+                <span class="update-date">2025年5月中旬</span>
+                <h2>技术探索：网页版原型（Streamlit）</h2>
+                <p>基于Python Streamlit框架，进行了将工具网页化的初步探索。虽然此版本因性能原因未公开发布，但它为当前网页版的成功开发奠定了重要的技术思路。</p>
+            </li>
+            <li class="update-item">
+                <span class="update-date">2025年4月中旬</span>
+                <h2>项目的起源：Excel版原型开发</h2>
+                <p>一切始于一个简单的想法：用技术简化工作。首个版本基于Excel公式构建，解决了从评估点到纪要文本转换的核心问题，验证了项目的可行性。</p>
+                <ul>
+                    <li><strong>初始功能</strong>：支持商机评估会与投标评估会两种纪要的生成。</li>
+                    <li><strong>核心理念</strong>：通过标准化模板，实现纪要文本的快速生成。</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
