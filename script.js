@@ -421,7 +421,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const EMAIL_DATA = {
          
-
 };
 
 
@@ -457,11 +456,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <div>
 <ul>
 <li><span style="color: #ff0000;"><a style="color: #ff0000;" href="#index_others">其他情况</a></span></li>
+
+
+
 </ul>
 </div>
 <div>
 <ul>
-<li><span style="color: #ff0000;"><a style="color: #ff0000;" href="#index_other_info">其他核对要点</a></span></li>
+<li><span style="color: #ff0000;"><a style="color: #ff0000;" href="#index_other_info">其他核对要点</a></span></a>&mdash;<a style="color: #0000ff;" href="#index_Differential">差额列收</a></li>
 </ul>
 </div>
 <hr />
@@ -535,6 +537,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <div>&nbsp;</div>
 <div><strong>净利润率：</strong>不含税，保留两位小数</div>
 <div>&nbsp;</div>
+
+
+
 <div>
 <div id="Index_SJ_projectRisk">
 <div><strong>存在风险（商机）：</strong></div>
@@ -796,6 +801,30 @@ document.addEventListener('DOMContentLoaded', function() {
 7、其他特殊情况建议一项目一议。</div>
 <div>&nbsp;</div>
 <div>&nbsp;</div>
+
+
+
+
+<div id="index_Differential"><strong><span style="color: #ff0000;">差额列收</span></strong></div>
+<div style="margin-left: 40px;">
+“差额/代收代付列收”因情况特殊，纪要描述按以下要求<br />
+1、销客系统、项管系统<br />
+1）预算: 按照完整的“合同额”进行填写。<br />
+2）外采预算: 按照“差额”的金额进行填写。<br />
+<br />
+2、会议纪要明确业务模式:在纪要结论中，必须明确项目采用 “差额列收” 方式<br />
+1）明确“实际列收金额”(即“合同额”-“差额”)。<br />
+2）处理“差额”部分的描述:系统中的“外采预算”填的是差额，但在纪要的结论部分，针对差额部分， “外采预算”应描述为 “无外采预算”。<br />
+3）“外采内容” 则按照实际情况填写。<br />
+4）金额明细拆分:在描述外采情况时，必须清晰地列出两个部分的金额：① 实际外采部分多少② 差额部分多少<br />
+<br />
+</div>
+
+<p><b>公式:</b></p>
+$$毛利率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采}}{\\text{合同额} - \\text{差额}}$$
+$$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\text{人工成本}}{\\text{合同额}}$$
+
+
 <div>&nbsp;</div>
 <div>&nbsp;</div>
 <div>&nbsp;</div>
@@ -942,11 +971,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inject Help HTML
     DOMElements.helpContent.innerHTML = HELP_HTML;
+    if (window.MathJax) {
+        MathJax.typesetPromise([DOMElements.helpContent]);
+    }
 
     // Create Delivery Details Table Rows
     const tableBody = DOMElements.deliveryDetailsTable.querySelector('tbody');
     const verticalHeaders = ['牵头交付事业部', ...Array.from({length: 7}, (_, i) => `协助交付事业部${i + 1}`)];
-    const deptOptions = ["", "IT系统事业部", "大数据AI应用事业部", "数字政府事业部", "云网事业部", "智呼事业部", "智慧企业集成事业部", "智慧网络运营事业部", "智慧业财事业部"];
+    const deptOptions = ["", "IT系统事业部", "大数据AI应用事业部", "数字政府事业部", "云网事业部", "智呼事业部", "智慧企业集成事业部/中国电信工业产业主研院", "智慧网络运营事业部", "智慧业财事业部"];
 
     verticalHeaders.forEach(headerText => {
         const row = tableBody.insertRow();
