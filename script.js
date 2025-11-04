@@ -1742,11 +1742,21 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
 
     // ======================= IMPORT/EXPORT LOGIC ======================
     
-    document.getElementById('btn-export').addEventListener('click', () => {
+   document.getElementById('btn-export').addEventListener('click', () => {
         const data = gatherFormData();
         const projectName = data.projectName || '纪要数据';
         const businessCode = data.businessCode ? `(${data.businessCode})` : '';
-        const timestamp = new Date().toISOString().slice(0, 16).replace(/[-T:]/g, '');
+        
+        // --- 修复时区问题的代码 ---
+        const now = new Date(); // 获取当前本地时间
+        const Y = now.getFullYear();
+        const M = (now.getMonth() + 1).toString().padStart(2, '0'); // 月份从0开始，所以+1
+        const D = now.getDate().toString().padStart(2, '0');
+        const h = now.getHours().toString().padStart(2, '0');
+        const m = now.getMinutes().toString().padStart(2, '0');
+        const timestamp = `${Y}${M}${D}${h}${m}`; // 拼接为 YYYYMMDDHHMM 格式
+        // --- 修复结束 ---
+        
         const filename = `${projectName}${businessCode}_${timestamp}.json`;
         const blob = new Blob([JSON.stringify(data, null, 4)], { type: 'application/json' });
         const link = document.createElement('a');
@@ -1803,3 +1813,4 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
     }
 
 }); // End of DOMContentLoaded
+
