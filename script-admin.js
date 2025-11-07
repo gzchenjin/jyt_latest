@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const authDiv = document.getElementById('auth');
     const contentDiv = document.getElementById('content');
     const recordsTableBody = document.querySelector('#records-table tbody');
-    
+
     // 批量操作元素
     const checkAllBox = document.getElementById('check-all');
     const deleteSelectedBtn = document.getElementById('delete-selected-btn');
     const exportSelectedBtn = document.getElementById('export-selected-btn');
-    
-    // 【新增】过滤和分页元素
+
+    // 过滤和分页元素
     const filterBtn = document.getElementById('filter-btn');
     const exportFilteredBtn = document.getElementById('export-filtered-btn');
     const startDateInput = document.getElementById('start-date');
@@ -28,29 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
     let totalPages = 1;
 
-    // 1. "登录" 按钮 (原 "加载数据" 按钮)
+    // 【【【 关键：定义 API 的根地址 】】】
+    const API_BASE_URL = 'https://www.gzchenjin.com';
+
+    // 1. "登录" 按钮
     loginBtn.addEventListener('click', async () => {
         adminSecret = passwordInput.value;
         if (!adminSecret) {
             errorMsg.textContent = '请输入密码！';
             return;
         }
-
-        // 尝试加载第一页数据以验证密码
         await loadRecords(1);
     });
 
-    // 2. 【【【 新核心功能：加载数据 】】】
+    // 2. 核心功能：加载数据
     async function loadRecords(page = 1) {
-        errorMsg.textContent = ''; // 清除旧错误
-        
-        // 从输入框获取过滤条件
+        errorMsg.textContent = '';
         const perPage = parseInt(perPageSelect.value, 10);
-        const startDate = startDateInput.value || null; // 发送 null 如果为空
+        const startDate = startDateInput.value || null;
         const endDate = endDateInput.value || null;
 
         try {
-            const response = await fetch('/api/get-all-records', {
+            // 【已修改】使用绝对路径
+            const response = await fetch(`${API_BASE_URL}/api/get-all-records`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 const err = await response.json();
                 errorMsg.textContent = `加载失败: ${err.error}`;
-                // 如果密码错误，重新显示登录框
                 if (response.status === 403) {
                     authDiv.style.display = 'block';
                     contentDiv.style.display = 'none';
@@ -73,16 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // 密码正确，显示内容
             authDiv.style.display = 'none';
             contentDiv.style.display = 'block';
-
             const data = await response.json();
-            
-            // 填充表格
             populateTable(data.records);
-            
-            // 更新分页
             currentPage = data.current_page;
             totalPages = data.total_pages;
             updatePaginationControls(data);
@@ -92,9 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. 填充表格函数 (不变)
+    // 3. 填充表格函数
     function populateTable(records) {
-        recordsTableBody.innerHTML = ''; // 清空表格
+        recordsTableBody.innerHTML = '';
         records.forEach(record => {
             const row = recordsTableBody.insertRow();
             row.innerHTML = `
@@ -105,77 +98,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${new Date(record.created_at).toLocaleString()}</td>
                 <td><span class="delete-btn" data-id="${record.id}">删除</span></td>
             `;
-            
+
             row.querySelector('.delete-btn').addEventListener('click', () => {
                 handleDelete(record.id, row);
             });
         });
-        // 清除批量操作按钮
         updateSelectionButtons();
         checkAllBox.checked = false;
     }
 
-    // 4. 【【【 新增：更新分页控件 】】】
+    // 4. 更新分页控件
     function updatePaginationControls(data) {
         pageInfo.textContent = `第 ${data.current_page} / ${data.total_pages} 页`;
         totalItemsInfo.textContent = `(总计 ${data.total_items} 条记录)`;
-        
-        // 启用/禁用上一页
         prevPageBtn.disabled = !data.has_prev;
-        
-        // 启用/禁用下一页
         nextPageBtn.disabled = !data.has_next;
     }
 
-    // 5. 【【【 新增：分页按钮事件 】】】
+    // 5. 分页按钮事件
     prevPageBtn.addEventListener('click', () => {
-        if (currentPage > 1) {
-            loadRecords(currentPage - 1);
-        }
+        if (currentPage > 1) { loadRecords(currentPage - 1); }
     });
-
     nextPageBtn.addEventListener('click', () => {
-        if (currentPage < totalPages) {
-            loadRecords(currentPage + 1);
-        }
+        if (currentPage < totalPages) { loadRecords(currentPage + 1); }
     });
 
-    // 6. 【【【 新增：过滤按钮事件 】】】
+    // 6. 过滤按钮事件
     filterBtn.addEventListener('click', () => {
-        loadRecords(1); // 过滤时总是返回第一页
+        loadRecords(1);
     });
-    
-    // 7. 【【【 新增：按日期导出按钮事件 】】】
+
+    // 7. 按日期导出按钮事件
     exportFilteredBtn.addEventListener('click', () => {
         const startDate = startDateInput.value;
         const endDate = endDateInput.value;
-        
         if (!startDate || !endDate) {
             alert('请先选择开始日期和结束日期，然后再点击“按日期导出”。');
             return;
         }
-        
-        // 重用我们现有的 /api/export-excel 路由
-        const exportUrl = `/api/export-excel?start=${startDate}&end=${endDate}`;
-        window.location.href = exportUrl; // 通过 GET 请求触发下载
+        // 【已修改】使用绝对路径
+        const exportUrl = `${API_BASE_URL}/api/export-excel?start=${startDate}&end=${endDate}`;
+        window.location.href = exportUrl;
     });
 
-    // 8. (静默版) 删除处理函数
-    // 【修改】删除后，它会重新加载当前页
+    // 8. 删除处理函数
     async function handleDelete(id, rowElement) {
         if (!confirm(`您确定要删除 ID 为 ${id} 的记录吗？此操作无法撤销！`)) {
             return;
         }
         try {
-            const response = await fetch(`/api/delete-record/${id}`, {
+            // 【已修改】使用绝对路径
+            const response = await fetch(`${API_BASE_URL}/api/delete-record/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ secret: adminSecret })
             });
             const result = await response.json();
             if (response.ok) {
-                // rowElement.remove(); // 不再只是移除，而是重新加载
-                loadRecords(currentPage); // 重新加载当前页
+                loadRecords(currentPage);
             } else {
                 alert(`删除失败: ${result.error}`);
             }
@@ -183,8 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(`请求出错: ${e.message}`);
         }
     }
-    
-    // 9. 更新“操作”按钮的计数 (不变)
+
+    // 9. 更新“操作”按钮的计数
     function updateSelectionButtons() {
         const checkedBoxes = recordsTableBody.querySelectorAll('.row-check:checked');
         const count = checkedBoxes.length;
@@ -199,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. “全选”复选框的逻辑 (不变)
+    // 10. “全选”复选框的逻辑
     checkAllBox.addEventListener('click', () => {
         recordsTableBody.querySelectorAll('.row-check').forEach(checkbox => {
             checkbox.checked = checkAllBox.checked;
@@ -207,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSelectionButtons();
     });
 
-    // 11. 监听表格中任何复选框的点击 (不变)
+    // 11. 监听表格中任何复选框的点击
     recordsTableBody.addEventListener('click', (e) => {
         if (e.target.classList.contains('row-check')) {
             updateSelectionButtons();
@@ -215,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 12. “删除选中”按钮的点击事件
-    // 【修改】删除后，它会重新加载当前页
     deleteSelectedBtn.addEventListener('click', async () => {
         const checkedBoxes = recordsTableBody.querySelectorAll('.row-check:checked');
         const idsToDelete = Array.from(checkedBoxes).map(cb => cb.dataset.id);
@@ -224,7 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
-            const response = await fetch('/api/delete-batch', {
+            // 【已修改】使用绝对路径
+            const response = await fetch(`${API_BASE_URL}/api/delete-batch`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ secret: adminSecret, ids: idsToDelete })
@@ -232,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await response.json();
             if (response.ok) {
                 alert(result.message);
-                loadRecords(currentPage); // 重新加载当前页
+                loadRecords(currentPage);
             } else {
                 alert(`删除失败: ${result.error}`);
             }
@@ -241,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 13. “导出选中”按钮的点击事件 (逻辑不变)
+    // 13. “导出选中”按钮的点击事件
     exportSelectedBtn.addEventListener('click', async () => {
         const checkedBoxes = recordsTableBody.querySelectorAll('.row-check:checked');
         const idsToExport = Array.from(checkedBoxes).map(cb => cb.dataset.id);
@@ -249,7 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
         exportSelectedBtn.textContent = '正在导出...';
         exportSelectedBtn.disabled = true;
         try {
-            const response = await fetch('/api/export-batch', {
+            // 【已修改】使用绝对路径
+            const response = await fetch(`${API_BASE_URL}/api/export-batch`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ secret: adminSecret, ids: idsToExport })
