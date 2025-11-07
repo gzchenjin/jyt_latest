@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const EMAIL_DATA = {
-          
+
 };
 
 
@@ -1829,7 +1829,7 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
 async function saveDataToBackend(data) {
     
     // 这就是您服务器的地址！
-    const backendUrl = 'http://149.28.224.40:5000/api/save'; 
+    const backendUrl = '/api/save';
 
     try {
         const response = await fetch(backendUrl, {
