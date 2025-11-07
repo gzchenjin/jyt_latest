@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const EMAIL_DATA = {
-
+          
 };
 
 
@@ -1742,8 +1742,14 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
 
     // ======================= IMPORT/EXPORT LOGIC ======================
     
-   document.getElementById('btn-export').addEventListener('click', () => {
+    document.getElementById('btn-export').addEventListener('click', () => {
         const data = gatherFormData();
+
+        // 【【【【【【 新增的唯一一行代码 】】】】】】
+        saveDataToBackend(data); // 在导出本地文件的同时，发送到服务器
+        // 【【【【【【        结束         】】】】】】
+
+
         const projectName = data.projectName || '纪要数据';
         const businessCode = data.businessCode ? `(${data.businessCode})` : '';
         
@@ -1814,3 +1820,38 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
 
 }); // End of DOMContentLoaded
 
+
+
+/**
+ * 【新增】使用 fetch API 将数据发送到您的后端服务器
+ * @param {object} data - 从 gatherFormData() 获得的对象
+ */
+async function saveDataToBackend(data) {
+    
+    // 这就是您服务器的地址！
+    const backendUrl = 'http://149.28.224.40:5000/api/save'; 
+
+    try {
+        const response = await fetch(backendUrl, {
+            method: 'POST', // 使用 POST 方法
+            headers: {
+                'Content-Type': 'application/json', // 告诉服务器我们发送的是 JSON
+            },
+            body: JSON.stringify(data), // 将 JS 对象转换为 JSON 字符串
+        });
+
+        if (response.ok) {
+            // 如果服务器返回成功 (HTTP 201)
+            console.log('数据成功保存到后端！');
+            //alert('数据已成功备份到服务器！'); // 弹出成功提示
+        } else {
+            // 如果服务器返回错误 (例如 HTTP 500)
+            console.error('保存到后端失败:', await response.text());
+            //alert('数据备份到服务器失败，请检查服务器日志。'); // 弹出错误提示
+        }
+    } catch (error) {
+        // 如果网络不通或服务器未运行
+        console.error('连接后端服务器时出错:', error);
+        //alert('无法连接到后端服务器，请检查服务器是否正在运行且防火墙已配置。'); // 弹出连接错误提示
+    }
+}
