@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>JYT 管理后台</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; color: #333; }
+        #auth { background: #f0f0f0; padding: 15px; border-radius: 8px; max-width: 400px; }
+        #content { display: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .delete-btn { color: #dc3545; cursor: pointer; font-weight: bold; }
+        
+        /* 按钮样式 */
+        button {
+            background-color: #007bff; color: white; padding: 8px 12px;
+            border: none; border-radius: 5px; cursor: pointer;
+        }
+        button:disabled { background-color: #ccc; }
+        #delete-selected-btn, #export-selected-btn { 
+            display: none; /* 默认隐藏 */
+            color: white; padding: 5px 10px; border: none; 
+            border-radius: 5px; cursor: pointer; 
+            margin-bottom: 10px; margin-right: 5px;
+        }
+        #delete-selected-btn { background-color: #dc3545; }
+        #export-selected-btn { background-color: #28a745; }
+        #export-filtered-btn { background-color: #17a2b8; }
+
+        /* 新增：过滤和分页 */
+        .controls-bar {
+            background: #f9f9f9; padding: 15px; border: 1px solid #eee;
+            border-radius: 8px; display: flex; flex-wrap: wrap; 
+            gap: 15px; align-items: center;
+        }
+        .controls-bar label { font-weight: bold; }
+        .controls-bar input, .controls-bar select {
+            padding: 5px; border: 1px solid #ccc; border-radius: 4px;
+        }
+        #pagination-controls {
+            margin-top: 15px; text-align: center;
+        }
+        #pagination-controls button { margin: 0 5px; }
+        #page-info { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>JYT 纪要通 - 管理后台</h1>
+
+    <div id="auth">
+        <label for="password">请输入管理密码:</label>
+        <input type="password" id="password" placeholder="..."/>
+        <button id="login-btn">登录</button>
+        <p id="error-msg" style="color:red;"></p>
+    </div>
+
+    <div id="content">
+        
+        <div class="controls-bar">
+            <label for="start-date">开始日期:</label>
+            <input type="date" id="start-date" value="2025-10-01">
+            
+            <label for="end-date">结束日期:</label>
+            <input type="date" id="end-date" value="2026-12-31">
+            
+            <label for="per-page">每页:</label>
+            <select id="per-page">
+                <option value="20">50</option>
+                <option value="50">100</option>
+                <option value="100">200</option>
+            </select>
+            
+            <button id="filter-btn">过滤/刷新</button>
+            <button id="export-filtered-btn">导出 (按日期)</button>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <button id="delete-selected-btn">删除选中 (0)</button>
+            <button id="export-selected-btn">导出选中 (0)</button>
+        </div>
+        
+        <table id="records-table">
+            <thead>
+                <tr>
+                    <th style="width: 30px;"><input type="checkbox" id="check-all"></th>
+                    <th>ID</th>
+                    <th>项目名称</th>
+                    <th>商机编码</th>
+                    <th>保存时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+
+        <div id="pagination-controls">
+            <button id="prev-page" disabled>« 上一页</button>
+            <span id="page-info">第 1 / 1 页</span>
+            <button id="next-page" disabled>下一页 »</button>
+            <div id="total-items-info" style="margin-top: 5px; font-size: 0.9em; color: #555;"></div>
+        </div>
+    </div>
+
+    <script src="/script-admin.js"></script>
+</body>
+</html>
