@@ -1237,7 +1237,7 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
         const OT_risk = getVal('OT_risk');
         
         const clientDescription = !temp.contractClient  ? "【请补充签约客户】"
-          : `项目签约客户是${temp.contractClient}` 
+          : `${temp.contractClient}` 
           + ((!temp.endClient || temp.endClient === temp.contractClient) ? '。'
           : `，最终客户是${temp.endClient}。`);
 
@@ -1299,7 +1299,7 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
         const TB_biddingRisk = getVal('TB_biddingRisk', "【请补充招投标风险评估】");
 
         const clientDescription = !temp.contractClient  ? "【请补充签约客户】"
-          : `项目签约客户是${temp.contractClient}` 
+          : `${temp.contractClient}` 
           + ((!temp.endClient || temp.endClient === temp.contractClient) ? '。'
           : `，最终客户是${temp.endClient}。`);
         
@@ -1369,7 +1369,7 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
         const OT_risk = getVal('OT_risk');
 
         const clientDescription = !temp.contractClient  ? "【请补充签约客户】"
-          : `项目签约客户是${temp.contractClient}` 
+          : `${temp.contractClient}` 
           + ((!temp.endClient || temp.endClient === temp.contractClient) ? '。'
           : `，最终客户是${temp.endClient}。`);
 
@@ -1855,3 +1855,4 @@ async function saveDataToBackend(data) {
         //alert('无法连接到后端服务器，请检查服务器是否正在运行且防火墙已配置。'); // 弹出连接错误提示
     }
 }
+
