@@ -1829,7 +1829,7 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
 async function saveDataToBackend(data) {
     
     // 这就是您服务器的地址！
-    const backendUrl = '/api/save';
+    const backendUrl = 'https://www.gzchenjin.com/api/save';
 
     try {
         const response = await fetch(backendUrl, {
@@ -1855,4 +1855,5 @@ async function saveDataToBackend(data) {
         //alert('无法连接到后端服务器，请检查服务器是否正在运行且防火墙已配置。'); // 弹出连接错误提示
     }
 }
+
 
