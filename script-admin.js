@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkAllBox = document.getElementById('check-all');
     const deleteSelectedBtn = document.getElementById('delete-selected-btn');
     const exportSelectedBtn = document.getElementById('export-selected-btn');
+    const exportJsonBtn = document.getElementById('export-json-btn');
 
     // 过滤和分页元素
     const filterBtn = document.getElementById('filter-btn');
@@ -173,9 +174,15 @@ document.addEventListener('DOMContentLoaded', () => {
             exportSelectedBtn.textContent = `导出选中 (${count})`;
             deleteSelectedBtn.style.display = 'inline-block';
             exportSelectedBtn.style.display = 'inline-block';
+            
+            exportJsonBtn.textContent = `导出原始JSON (${count})`; // 【新增】
+            exportJsonBtn.style.display = 'inline-block'; // 【新增】
+            exportJsonBtn.disabled = false; // 【新增】
         } else {
             deleteSelectedBtn.style.display = 'none';
             exportSelectedBtn.style.display = 'none';
+            exportJsonBtn.style.display = 'none'; // 【新增】
+            exportJsonBtn.disabled = true; // 【新增】
         }
     }
 
@@ -263,4 +270,71 @@ document.addEventListener('DOMContentLoaded', () => {
             updateSelectionButtons();
         }
     });
+
+        // script-admin.js - 文件底部，在其他按钮事件之后添加
+
+    // 【【【 新增：导出原始 JSON 按钮的点击事件 】】】
+    exportJsonBtn.addEventListener('click', async () => {
+        const checkedBoxes = recordsTableBody.querySelectorAll('.row-check:checked');
+        // 获取选中的所有 ID
+        const idsToExport = Array.from(checkedBoxes).map(cb => parseInt(cb.dataset.id, 10)); 
+    
+        if (idsToExport.length === 0) return;
+
+        exportJsonBtn.textContent = '正在下载...';
+        exportJsonBtn.disabled = true;
+
+        try {
+            // 调用新的 JSON 批量导出 API
+            const response = await fetch(`/api/get-raw-json-batch`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify({ secret: adminSecret, ids: idsToExport })
+         });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+             alert(`导出失败: ${errorData.error || response.statusText}`);
+             return;
+            }
+
+            const jsonResponse = await response.json();
+        
+            // 确定文件名
+            let filename = `jyt_export_${idsToExport.length}_records.json`;
+        
+            // 如果只导出一个文件，尝试使用项目名称作为文件名
+            if (idsToExport.length === 1 && jsonResponse.length > 0 && jsonResponse[0].projectName) {
+                filename = `${jsonResponse[0].projectName}_${idsToExport[0]}.json`;
+            } else if (idsToExport.length === 1 && jsonResponse.projectName) {
+                 // 兼容如果返回单个对象的情况
+                filename = `${jsonResponse.projectName}_${idsToExport[0]}.json`;
+            }
+
+
+            // 创建 Blob 并触发下载
+            // 注意：API 返回的是一个包含所有选中 JSON 对象的数组
+            const blob = new Blob([JSON.stringify(jsonResponse, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click(); 
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+
+            alert(`成功导出 ${idsToExport.length} 条记录为 ${filename}`);
+
+
+        } catch (e) {
+            alert(`请求出错: ${e.message}`);
+        } finally {
+            exportJsonBtn.disabled = false;
+            updateSelectionButtons(); // 恢复按钮文字
+        }
+    });
+
+
 });
