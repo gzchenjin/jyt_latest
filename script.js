@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const EMAIL_DATA = {
-
+         
 };
 
 
@@ -1781,7 +1781,14 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
         reader.onload = (e) => {
             try {
                 const data = JSON.parse(e.target.result);
-                populateFormData(data);
+                let importData = data;
+                if (Array.isArray(data) && data.length > 0) {
+                    console.log('检测到数据库导出格式 (数组)，将导入第一个条目。');
+                    importData = data[0]; // 只获取数组中的第一个对象
+            }
+
+                
+                populateFormData(importData);
                 alert('数据导入成功！');
             } catch (err) { alert(`导入失败: ${err.message}`); }
         };
@@ -1855,5 +1862,3 @@ async function saveDataToBackend(data) {
         //alert('无法连接到后端服务器，请检查服务器是否正在运行且防火墙已配置。'); // 弹出连接错误提示
     }
 }
-
-
