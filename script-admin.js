@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/get-all-records`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // <--- 加上这一行
                 body: JSON.stringify({ 
                     secret: adminSecret,
                     page: page,
@@ -152,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/delete-record/${id}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // <--- 加上这一行
                 body: JSON.stringify({ secret: adminSecret })
             });
             const result = await response.json();
@@ -214,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/delete-batch`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // <--- 加上这一行
                 body: JSON.stringify({ secret: adminSecret, ids: idsToDelete })
             });
             const result = await response.json();
@@ -240,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/export-batch`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // <--- 加上这一行
                 body: JSON.stringify({ secret: adminSecret, ids: idsToExport })
             });
             if (response.ok) {
@@ -289,6 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`/api/get-raw-json-batch`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // <--- 2. 加上凭证
                body: JSON.stringify({ secret: adminSecret, ids: idsToExport })
          });
 
