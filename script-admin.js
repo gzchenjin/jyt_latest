@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // 调用新的 JSON 批量导出 API
-            const response = await fetch(`/api/get-raw-json-batch`, {
+            const response = await fetch(`${API_BASE_URL}/api/get-raw-json-batch`, { // <--- 必须用 API_BASE_URL
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include', // <--- 2. 加上凭证
@@ -343,3 +343,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
