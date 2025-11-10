@@ -10,15 +10,19 @@
         table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
         th { background-color: #f2f2f2; }
-        .delete-btn { color: #dc3545; cursor: pointer; font-weight: bold; }
+        .delete-btn { background-color: #dc3545; color:white; padding: 5px 10px; border: none; 
+            border-radius: 5px; cursor: pointer; 
+            margin-bottom: 10px; margin-right: 5px; }
+        .delete-btn:hover { background-color:#cb2939}
         
-        /* 按钮样式 */
+        /* 按钮样式-如不设置就按这个，否则则按下面的单独定义 */
         button {
             background-color: #007bff; color: white; padding: 8px 12px;
             border: none; border-radius: 5px; cursor: pointer;
         }
+
         button:disabled { background-color: #ccc; }
-        #delete-selected-btn, #export-selected-btn, #export-json-btn{ 
+        #delete-selected-btn, #export-selected-btn, #export-json-btn { 
             display: none; /* 默认隐藏 */
             color: white; padding: 5px 10px; border: none; 
             border-radius: 5px; cursor: pointer; 
@@ -26,8 +30,28 @@
         }
         #delete-selected-btn { background-color: #dc3545; }
         #export-selected-btn { background-color: #28a745; }
-        #export-filtered-btn { background-color: #17a2b8; }
+        #export-filtered-btn { background-color: #3832a9; }
+        #filter-btn { background-color: #007bff; }
         #export-json-btn { background-color: #3832a9; }
+
+
+        /* 为所有需要悬停效果的按钮添加平滑过渡 */
+        button, #delete-selected-btn, #export-selected-btn, #export-filtered-btn, #filter-btn, #export-json-btn,.delete-btn {
+            transition: filter 0.2s; /* 关键：让变暗效果平滑过渡 */
+        }
+
+        /* 统一的悬停样式：将所有按钮亮度降低到 85% */
+        button:hover,#delete-selected-btn:hover,#export-selected-btn:hover,#export-filtered-btn:hover,#filter-btn:hover,#export-json-btn:hover,.delete-btn:hover {
+            filter: brightness(85%); 
+        }
+
+        /* 确保禁用按钮在悬停时不会变暗 */
+        button:disabled:hover {
+            filter: none;
+            background-color: #ccc;
+        }
+
+
 
         /* 新增：过滤和分页 */
         .controls-bar {
