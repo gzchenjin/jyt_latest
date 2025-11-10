@@ -18,7 +18,7 @@
             border: none; border-radius: 5px; cursor: pointer;
         }
         button:disabled { background-color: #ccc; }
-        #delete-selected-btn, #export-selected-btn { 
+        #delete-selected-btn, #export-selected-btn, #export-json-btn{ 
             display: none; /* 默认隐藏 */
             color: white; padding: 5px 10px; border: none; 
             border-radius: 5px; cursor: pointer; 
@@ -27,6 +27,7 @@
         #delete-selected-btn { background-color: #dc3545; }
         #export-selected-btn { background-color: #28a745; }
         #export-filtered-btn { background-color: #17a2b8; }
+        #export-json-btn { background-color: #3832a9; }
 
         /* 新增：过滤和分页 */
         .controls-bar {
@@ -78,7 +79,7 @@
         <div style="margin-top: 15px;">
             <button id="delete-selected-btn">删除选中 (0)</button>
             <button id="export-selected-btn">导出选中 (0)</button>
-            <button id="export-json-btn" style="background-color: #008CBA; color: white; margin-left: 5px; display: none;" disabled>导出原始JSON (0)</button>
+            <button id="export-json-btn">导出原始JSON (0)</button>
         </div>
         
         <table id="records-table">
