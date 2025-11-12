@@ -1328,8 +1328,12 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
         const TB_securityAssessment = temp.TB_isPrimarySystem === '是' ? getVal('TB_securityAssessment', "【请补充网络和信息安全评估】")
             : temp.TB_isPrimarySystem === '否' ? "本项目不涉及亿迅主责系统" : "【请评估是否亿迅主责系统】";
 
+        const trimmedContent = constructionContent.endsWith('。') 
+            ? constructionContent.slice(0, -1) 
+            : constructionContent;
+
         const key1_text = `本项目为${TB_businessType}项目，项目签约客户是${clientDescription}客户计划采用${bid_method_desc}。`;
-        const key2_text = `项目建设内容为：${constructionContent}。由${temp.lead_department}牵头，${temp.assist_departments_summary}${temp.tjs_summary}${temp.delivery_summary}`;
+        const key2_text = `项目建设内容为：${trimmedContent}。由${temp.lead_department}牵头，${temp.assist_departments_summary}${temp.tjs_summary}${temp.delivery_summary}`;
         const key3_text = `本项目预算${temp.budget_in_wan.toFixed(2)}万元（含税），属于${capacityType}${projectLevel}项目，${procurement_text}毛利率预估${_safeFloat(temp.TB_grossMargin).toFixed(2)}%（不含税）。`;
         const key4_text = `本项目交付要求：交付周期为${TB_deliveryPeriod}，${TB_deliveryRisk}`;
 
@@ -1406,10 +1410,15 @@ $$利润率 = \\frac{\\text{合同额} - \\text{差额} - \\text{外采} - \\tex
             
         const procurementRisk = temp.procurement === '是' ? getVal('procurementRisk', "【请补充外采风险】")
             : temp.procurement === '否' ? "本项目不涉及外采" : "【请评估是否涉及外采】";
+
+
+        const trimmedContent = constructionContent.endsWith('。') 
+            ? constructionContent.slice(0, -1) 
+            : constructionContent;
         
         const key1_text = `本项目为${JD_businessType}项目，项目签约客户是${clientDescription}客户采用${bid_method_desc}。`;
         const key2_text = `本项目预算${temp.budget_in_wan.toFixed(2)}万元（含税），${procurement_text}`;
-        const key3_text = `项目建设内容为：${constructionContent}。本项目属于${capacityType}${projectLevel}项目，由${temp.lead_department}牵头，${temp.assist_departments_summary}${temp.tjs_summary}${temp.delivery_summary}`;
+        const key3_text = `项目建设内容为：${trimmedContent}。本项目属于${capacityType}${projectLevel}项目，由${temp.lead_department}牵头，${temp.assist_departments_summary}${temp.tjs_summary}${temp.delivery_summary}`;
         const key4_text = "1、项目售前资料交底：销售经理、方案经理已对项目所有售前的会议纪要、客户沟通记录、客户需求及交付要求等资料交接给交付经理、项目经理；\n2、项目投标资料交底：销售经理、方案经理已对招标文件、投标文件、技术规范书等资料交接给交付经理、项目经理；\n3、项目实施计划交底：项目经理已完成项目里程碑计划，各关键节点已有明确的交付成果要求，铁三角已确认该时间节点可行；\n4、项目干系人交底：销售经理已上传项目干系人清单，清单已包含客户（签约客户/最终客户）以及合作伙伴干系人的名单和联系方式，铁三角对项目干系人已知晓。";
         const key5_text = `本项目交付要求：交付周期为${JD_deliveryPeriod}，${JD_deliveryRisk}`;
 
@@ -1862,5 +1871,6 @@ async function saveDataToBackend(data) {
         //alert('无法连接到后端服务器，请检查服务器是否正在运行且防火墙已配置。'); // 弹出连接错误提示
     }
 }
+
 
 
