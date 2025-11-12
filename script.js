@@ -651,7 +651,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="Index_TB_securityAssessment">
 <div><strong>网络和信息安全评估：</strong>（主责系统）</div>
 <div>&nbsp;</div>
-<div style="margin-left: 40px;"><span style="color: #ff0000;">&bull;&nbsp;项目以系统形式存在需并且属亿迅公司主责</span>，上线阶段由运营管理部/研发与质量管理中心、安全事业部组织独立评审，涵盖安全纳管、渗透测试、风险评估、定级备案等。<br /><span style="color: #ff0000;">&bull;&nbsp;同时邀请运营管理部/研发与质量管理中心、安全事业部：吴中华、陆艺阳参会，会上评估后给出结论</span></div>
+<div style="margin-left: 40px;"><span style="color: #ff0000;">&bull;&nbsp;项目以系统形式存在需并且属亿迅公司主责</span>，上线阶段由运营管理部/研发与质量管理中心、安全事业部组织独立评审，涵盖安全纳管、渗透测试、风险评估、定级备案等。<br /><span style="color: #ff0000;">&bull;&nbsp;邀请运营管理部/研发与质量管理中心、安全事业部：吴中华、陆艺阳参会，会上评估后给出结论</span></div>
 </div>
 <div>&nbsp;
 <div id="Index_TB_maintenanceAssessment">
@@ -1862,4 +1862,5 @@ async function saveDataToBackend(data) {
         //alert('无法连接到后端服务器，请检查服务器是否正在运行且防火墙已配置。'); // 弹出连接错误提示
     }
 }
+
 
