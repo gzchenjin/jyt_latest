@@ -420,38 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const EMAIL_DATA = {
-           "战略客户事业群": {"leader": ["林希达", "linxd1@chinatelecom.cn"],"manager": ["秦渝", "qiny1.gd@chinatelecom.cn"]},
-           "市场及渠道支撑部": {"leader": ["倪凌", "sznil.gd@chinatelecom.cn"],"manager": ["秦渝", "qiny1.gd@chinatelecom.cn"]},
-           "IT系统事业部": {"leader": ["黄平", "huangping.gd@chinatelecom.cn"],"manager": ["王明鹏", "wangmp.gd@chinatelecom.cn"]},
-           "大数据AI应用事业部（不含支撑广东电信低空中心建设工作团队）": {"leader": ["廖小文", "jcliaoxw.gd@chinatelecom.cn"],"manager": ["张文熙", "zhangwenxi.gd@chinatelecom.cn"]},
-           "大数据AI应用事业部（支撑广东电信低空中心建设工作团队）": {"leader": ["倪凌", "sznil.gd@chinatelecom.cn"],"manager": ["张文熙", "zhangwenxi.gd@chinatelecom.cn"]},
-           "数字政府事业部/社会治理大数据研究院广州分院": {"leader": ["廖小文", "jcliaoxw.gd@chinatelecom.cn"],"manager": ["刘昌卿", "liucq1.gd@chinatelecom.cn"]},
-           "云网事业部": {"leader": ["黄平", "huangping.gd@chinatelecom.cn"],"manager": ["区洪辉", "ouhh1.gd@chinatelecom.cn"]},
-           "智慧企业集成事业部/工业主研院": {"leader": ["孙黎", "sunl9.gd@chinatelecom.cn"],"manager": ["管志强", "gzq.gd@chinatelecom.cn"]},
-           "智慧网络运营事业部": {"leader": ["苗乔博", "miaoqb.gd@chinatelecom.cn"],"manager": ["谭凯", "tank1.gd@chinatelecom.cn"]},
-           "智慧业财事业部": {"leader": ["苗乔博", "miaoqb.gd@chinatelecom.cn"],"manager": ["余晓丽", "yuxl2.gd@chinatelecom.cn"]},
-           "智呼事业部": {"leader": ["孙黎", "sunl9.gd@chinatelecom.cn"],"manager": ["黄峰", "huangfeng1.gd@chinatelecom.cn"]},
-           "亿迅深圳分公司": {"leader": ["倪凌", "sznil.gd@chinatelecom.cn"],"manager": ["陈哲希", "chenzx3.gd@chinatelecom.cn"]},
-           "亿迅广州分公司": {"leader": ["杨翔", "yangxiang.gd@chinatelecom.cn"],"manager": ["胡琼丹", "huqd1.gd@chinatelecom.cn"]},
-           "亿迅东莞分公司": {"leader": ["廖小文", "jcliaoxw.gd@chinatelecom.cn"],"manager": ["项为平", "xiangwp.gd@chinatelecom.cn"]},
-           "亿迅佛山分公司": {"leader": ["廖小文", "jcliaoxw.gd@chinatelecom.cn"],"manager": ["卢庆添", "luqingt.gd@chinatelecom.cn"]},
-           "亿迅江门分公司": {"leader": ["苗乔博", "miaoqb.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅中山分公司": {"leader": ["杨翔", "yangxiang.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅珠海分公司": {"leader": ["苗乔博", "miaoqb.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅惠州分公司": {"leader": ["倪凌", "sznil.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅清远分公司": {"leader": ["黄平", "huangping.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅韶关分公司": {"leader": ["黄平", "huangping.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅河源分公司": {"leader": ["黄平", "huangping.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅梅州分公司": {"leader": ["黄平", "huangping.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅肇庆分公司": {"leader": ["苗乔博", "miaoqb.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅湛江分公司": {"leader": ["孙黎", "sunl9.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅阳江分公司": {"leader": ["孙黎", "sunl9.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅茂名分公司": {"leader": ["孙黎", "sunl9.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅云浮分公司": {"leader": ["孙黎", "sunl9.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅汕头分公司": {"leader": ["焦文华", "jiaowh.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅揭阳分公司": {"leader": ["焦文华", "jiaowh.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅潮州分公司": {"leader": ["焦文华", "jiaowh.gd@chinatelecom.cn"],"manager": ["", ""]},
-           "亿迅汕尾分公司": {"leader": ["焦文华", "jiaowh.gd@chinatelecom.cn"],"manager": ["", ""]},
+        
 };
 
 
@@ -1905,3 +1874,4 @@ async function saveDataToBackend(data) {
         //alert('无法连接到后端服务器，请检查服务器是否正在运行且防火墙已配置。'); // 弹出连接错误提示
     }
 }
+
