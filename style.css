@@ -200,14 +200,18 @@ body {
     flex-wrap: wrap;
 }
 
+
 .form-row > label:first-child {
     width: 120px;
     text-align: right;
     margin-right: 15px;
-    font-weight: 500;
-    color: var(--text-secondary);
+    /* 【修改点】改为纯黑色，并加粗，与 placeholder 形成强烈对比 */
+    color: #000000; 
+    font-weight: 600; 
     flex-shrink: 0;
 }
+
+
 
 /* 统一所有输入框（包括select）的样式 */
 input[type="text"], input[type="date"], input[type="number"], select, textarea {
@@ -258,7 +262,19 @@ input:disabled, select:disabled, textarea:disabled {
     flex: 1;
     align-items: center;
 }
-.inline-group label { white-space: nowrap; color: var(--text-secondary); font-size: 13px; }
+
+.inline-group label { 
+    white-space: nowrap; 
+    /* 【修改点】行内标签也改为纯黑色加粗 */
+    color: #000000; 
+    font-weight: 600;
+    font-size: 13px; 
+}
+
+::placeholder {
+    color: #bfbfbf; /* 浅灰色 */
+    opacity: 1;
+}
 
 /* --- 8. 右侧帮助面板 --- */
 .right-panel {
